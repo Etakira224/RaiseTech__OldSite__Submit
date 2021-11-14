@@ -135,19 +135,19 @@ const handleMediaQuery = function(mql) {
         $('.gmenu__item').on({
             "mouseenter": function(){
                 $(".submenu", this).slideDown();
-                // $(".submenu", this).css({
-                //     /* 
-                //     Sassの変更がコンパイル時反映されなくなる問題が起きたため
-                //     とりあえずこちらで指定しておく
-                //     */
-                //     'top':'82px',
-                //     'left':'0',
-                //     'position':'absolute',
-                //     'display':'inline-block', 
-                //     'flex-direction':'column',
-                //     // 'background-color':'#fff'
-                //     // 'align-items':'flex-start'
-                // });
+                $(".submenu", this).css({
+                    /* 
+                    Sassの変更がコンパイル時反映されなくなる問題が起きたため
+                    とりあえずこちらで指定しておく
+                    */
+                    'top':'80px',
+                    'left':'0',
+                    'position':'absolute',
+                    'display':'inline-block', 
+                    'flex-direction':'column',
+                    // 'background-color':'#fff'
+                    // 'align-items':'flex-start'
+                });
                 //↓offsetでは相対位置指定ができない（というかめんどい）
                 //かといってposition();だと取得しかできないので、Sassで普通に記述してみる。
                 // $(".submenu", this).offset({left: 30});
