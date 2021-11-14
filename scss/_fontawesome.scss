@@ -1,0 +1,38 @@
+@use "variables" as v;
+.fa-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14.3125rem;
+    height: 14.3125rem;
+    border-radius: 50%;
+    border: 0.35rem solid #000;
+    background-color: #FFF;
+
+    .strength-icon::before {
+        font-family: "Font Awesome 5 Free";
+        color: #000;
+        font-size: 8rem;
+    }
+
+    /* font-weight */
+    .fas::before {
+        font-weight: 900;
+    }
+    .far::before {
+        font-weight: 400;
+    }
+
+    /* Unicode */
+    .fa-dumbbell::before {
+        content: "\f44b";
+    }
+    .fa-chalkboard-teacher::before {
+        content: "\f51c";
+    }
+    .fa-comments::before {
+        content: "\f086";
+    }
+}
+
+

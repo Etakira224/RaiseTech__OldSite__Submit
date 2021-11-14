@@ -1,0 +1,155 @@
+@use "variables" as v;
+
+.main {
+    position: relative;
+    width: 100%;
+    // transition: all 1s;
+}
+.top-head {
+    position: relative;
+    @include v.z-index(top-head);
+    height: 214px;
+    // padding-top: 50px;
+    box-sizing: border-box;
+    .front-bg {
+        @include v.bg-layout();
+        background-image: url("../images/bg-hero1.png"); 
+        @include v.z-index(front-bg);  
+    }
+    .mid-bg {
+        @include v.bg-layout();
+        background-image: url("../images/bg-hero2.png");
+        @include v.z-index(mid-bg);
+    }
+    .back-bg {
+        @include v.bg-layout();
+        background-image: url("../images/bg-hero3.png");
+        @include v.z-index(back-bg);
+        // background-attachment: fixed;
+    }
+    @include v.breakpoint(tbs) {
+        padding-top: 0;
+    }
+}
+
+.main-content {
+    position: relative;
+    @include v.z-index(top-head);
+    @include v.breakpoint(tbs) {
+        margin-top: -30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.about {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.25rem 0;
+    z-index: 1000;
+    transition: all 1s ease;
+    @include v.breakpoint(tbs) {
+        display: flex;
+        box-sizing: border-box;
+        // width: 25.8125rem;
+        // height: 20.4375rem;
+        max-width: 33.125rem;
+        border-radius: 5px;
+        // padding: 2.6875rem 2.5rem 1.1875rem;
+       padding: 2.6875rem 3.5rem 1.1875rem;
+    }
+    .about__logo {
+        display: none;
+        @include v.breakpoint(tbs){
+            display: flex;
+            width: 17.5rem;
+            height: 3.625rem;
+            margin-bottom: 2rem;
+        }
+    }
+    .about__info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 20px;
+        margin-bottom: 1rem;
+        @include v.breakpoint(tbs){
+            font-size: 1rem;
+            line-height: 1.6875rem;
+            margin-bottom: 3rem;
+        }
+    }
+    .about__to-comic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #2498B3;
+        border: none;
+        border-radius: 5px;
+        width: 228px;
+        height: 41px;
+        transition: all 1s ease;
+        @include v.breakpoint(tbs) {
+            width: 18.125rem;
+            height: 4.1875rem;
+        }
+        a {
+            display: block;
+            font-size: 1rem;
+            font-weight: bold;
+            line-height: 16rem;
+            color: #fff;
+            text-decoration: none;
+            height: auto;
+            width: 100%;
+        }
+    }
+}
+
+.strengths-container {
+    padding: 30px 0 70px;
+    background-color: #000;
+    @include v.breakpoint(tbs) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 16.4375rem;
+    }
+    @include v.breakpoint(tbl) {
+        width: 100%;
+    }
+    .strength-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 30px 30px;
+        @include v.breakpoint(tbs) {
+            margin-top: -16.4375rem;
+        }
+        .strength-what {
+            font-weight: 900;
+            color: #fff;
+            text-align: center;
+            .strength-subhead {
+                font-size: 24px;
+                line-height: 41px;
+            }
+            .strength-desc {
+                font-size: 16px;
+                line-height: 27px;
+                @include v.breakpoint(tbl) {
+                    // white-space: pre-wrap;
+                    width: 14rem;
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,310 @@
+@use "variables" as v;
+
+/* 
+CSSアニメーションの設定
+*/
+@keyframes SlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-64px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    color: #131d34;
+    @include v.z-index(header);
+    background: #fff;
+    box-shadow: 0 2px 8px -8px;
+    @include v.breakpoint(pc) {
+        height: 5rem;
+    }
+}
+
+.header__title {
+    padding-left: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    header__title__logo {
+        width: 90%;
+        height: 90%;
+        @include v.breakpoint(pc) {
+            // width: 9.1825rem;
+            // height: 10rem;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .header__title__catch {
+        display: none;
+        @include v.breakpoint(pc) {
+            display: inline-block;
+            padding: 1rem;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            font-weight: 900;
+            line-height: 1.1375;
+            strong {
+                font-size: 1.125rem;
+            }
+        }
+    }
+}
+
+.global-nav {
+    position: fixed;
+    top: 60px;
+    display: block;
+    width: 100%;
+    @include v.breakpoint(pc) {
+        width: auto;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        position: relative;
+        top: 0;
+        // border: solid;
+    }
+    .gmenu {
+        display: none;
+        position: relative;
+        &.is-open {
+            display: flex;//←これはjQueryで指定済み
+            // flex-direction: column;
+            justify-content: flex-end;
+            // position: relative;
+            width: 100%;
+        }
+        @include v.breakpoint(pc) {
+            display: flex;
+            text-align: center;
+            justify-content: space-between;
+            white-space: nowrap;
+            padding-left: 50px;
+            height: 100%;
+        }
+    }
+}
+
+.gmenu__item {
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+    display: block;
+    // justify-content: center;
+    // flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    // margin-bottom: 1px;
+    position: relative;
+    white-space: nowrap;
+    // vertical-align: end;
+    // border: solid purple 3px;//調整用
+    @include v.breakpoint(pc) {
+        display: flex;
+        flex-direction: column;//状況把握用　
+        // justify-content: start;
+        align-items: center;
+        // margin-bottom: 1px;
+        position: relative;
+        white-space: nowrap;
+        // vertical-align: end;
+        // border: solid purple 3px;//調整用
+    }
+    .gmenu__item__link {
+        position: relative;
+        width: 100%;
+        // height: 100%;
+        height: 40px;
+        color: #000;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        text-decoration: none;
+        // border: solid red 3px;//調整用
+        &::before,
+        &::after {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: #000;
+            position: absolute;
+            top: 50%;
+            right: 50px;
+            transform: translateY(-50%);
+        }
+        &::after {
+            transform: translateY(-50%) rotate(90deg);
+            transition: .5s;
+        }
+        &.is-open {
+            &::before {
+                opacity: 0;
+            }
+            &::after {
+                transform: rotate(180deg);
+            }
+        }
+        &.gmenu__item__link--notParent {
+            &::before,
+            &::after {
+                opacity: 0;
+            }
+        }
+        @include v.breakpoint(pc) {
+            width: auto;
+            height: 100%;
+            // display: inline-block;//正常表示
+            // text-align: center;
+            /* 
+            display: flex;と中央ぞろえはspから継承済み 
+            */
+            // display: flex;
+            justify-content: center;
+            // align-items: center;
+            position: relative;
+            transition: all .5s;
+            &:hover:not(.gmenu__action__link) {
+                background-color: #D4F1F8;
+            }
+            &:hover + .submenu {
+                overflow: visible;
+                height: 3rem;
+            }
+            &::before,
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
+
+.gmenu__action {
+    display: none;
+    @include v.breakpoint(pc) {
+        display: flex;
+        .gmenu__action__link {
+            @include v.action-col;
+        }
+    }
+}
+
+/*
+gmenu__item__linkの疑似要素で対応したためまったく使わず…
+
+$openerWidth: 23px;
+$openerHeight: 3px;
+
+.gmenu__submenu-opener {
+    width: 30px;
+    height: 30px;
+    border: none;
+    position: relative;
+    &::after {
+        content: "";
+        width: $openerWidth;
+        height: $openerHeight;
+        background-color: gray;
+        position: absolute;
+        この部分でleftプロパティで位置の定義してた。
+        コメントアウト後も未定義関数使ってるよとのエラー吐いたので削除。
+        display: block;
+        transform: 0.2s;
+        top: 18px;
+    }
+    > span {
+        font-size: 0;
+        background-color: gray;
+        position: absolute;
+        background-size: auto $openerHeight;
+        同上。コメントアウト後にエラー吐いたため削除。
+        top: 50%;
+        transform: 0.2s;
+    }
+    &.is-open {
+        position: relative;
+        background-color: #fff;
+        transition: 0.2s;
+        &::after {
+            background-color: #fff;
+            transition: 0.2s;
+            transform: rotate( -90deg );
+            top: 10px;
+        }
+        > span {
+            background: none;
+            transition: 0.2s;
+        }
+    }
+    @include v.breakpoint(pc) {
+        display: none;
+    }
+}
+*/
+
+.submenu {
+    background: #fff;
+    display: none;
+    &.is-open {
+        display: flex;
+    }
+    @include v.breakpoint(pc) {
+        overflow: hidden;
+        // border: 3px solid pink; //調整用
+        /* 
+        以下jQueryの.css()に記述していたものを移植
+        */
+        // display: inline-block;
+        display: none;
+        top: 80px;
+        left: 0;
+        position: absolute;
+        // height: 0;
+        // transition: .5s;
+        // position:absolute;
+        // left: 0;
+    }
+    .submenu__item {
+        display: flex;
+        justify-content: flex-start;
+        // border-bottom: 1px solid #5200b7;
+        color: #000;
+        padding: 1rem;
+        background-color: #fff;
+        @include v.breakpoint(pc) {
+            height: 3rem;
+            position: relative;
+            display: flex;
+            box-sizing: border-box;
+            padding: 0.9375rem 3.75rem 0.9375rem 0.9375rem;
+            background-color: #D4F1F8;
+            transition: all .5s;
+            &:hover {
+                background-color: #fff;
+            }
+        }
+        .submenu__item__link {
+            text-decoration: none;
+            // display: block;
+            color: #000;
+            // height: 100%;
+            // width: 100%;
+            transition: all .5s;
+            &:hover {
+                color: #2498b3;
+            }
+        }
+    }
+}
